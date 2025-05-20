@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🤖✨ Travel Buddy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  :root {
+    --primary: hsl(138, 93%, 35%);
+    --secondary: hsl(207, 80%, 60%);
+    --background: #0d1723;
+    --card-bg: #1b2a40;
+    --text-light: #e0e6e8;
+    --text-muted: #7a8ba6;
+    --shadow: rgba(0, 0, 0, 0.6);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--background);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding: 20px;
+    user-select: none;
+  }
+
+  header {
+    background: linear-gradient(90deg, hsl(207, 80%, 60%), hsl(158, 75%, 45%));
+    width: 100%;
+    max-width: 900px;
+    border-radius: 15px;
+    padding: 25px 20px;
+    box-shadow: 0 6px 15px var(--shadow);
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 6px hsl(17, 15%, 12%);
+    letter-spacing: 0.06em;
+    user-select: text;
+  }
+
+  /* Video styling */
+  #introVideo {
+    margin: 30px 0;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--shadow);
+    display: block;
+  }
+
+  main {
+    background: var(--card-bg);
+    max-width: 900px;
+    width: 100%;
+    margin: 30px 0 40px;
+    border-radius: 15px;
+    padding: 30px 35px;
+    box-shadow: 0 8px 20px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+    user-select: text;
+  }
+
+  input[type=text] {
+    padding: 15px 18px;
+    font-size: 1.15rem;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background: #224060;
+    color: var(--text-light);
+    box-shadow: inset 0 0 8px #132c54;
+    transition: box-shadow 0.3s ease;
+  }
+
+  input[type=text]:focus {
+    box-shadow: inset 0 0 12px var(--primary);
+  }
+
+  button {
+    background: var(--primary);
+    border: none;
+    padding: 16px 28px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+    color: white;
+    align-self: flex-start;
+    box-shadow: 0 6px 12px hsla(158, 75%, 45%, 0.7);
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  button:hover {
+    background: hsl(158, 75%, 50%);
+    box-shadow: 0 8px 20px hsl(158, 75%, 50%);
+  }
+
+  #result {
+    margin-top: 15px;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 2rem;
+    background: var(--primary);
+    padding: 14px 22px;
+    border-radius: 16px;
+    color: white;
+    box-shadow: 0 5px 15px var(--primary);
+    user-select: text;
+    text-align: center;
+    text-shadow: 1px 1px 3px hsl(110, 76%, 60%);
+  }
+
+  .section-title {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--secondary);
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 6px;
+    margin-top: 30px;
+    user-select: text;
+  }
+
+  .summary, .additional-info, .weather, .location-link {
+    background: #224060;
+    padding: 18px 22px;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    box-shadow: inset 0 0 10px #132c54;
+    user-select: text;
+  }
+
+  .location-link a {
+    color: var(--secondary);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .location-link a:hover {
+    color: hsl(180, 70%, 60%);
+    text-decoration: underline;
+  }
+
+  .youtube-list, .attractions-list {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+    user-select: text;
+  }
+
+  .youtube-list li, .attractions-list li {
+    margin-bottom: 14px;
+    font-size: 1.1rem;
+  }
+
+  .youtube-list a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .youtube-list a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+
+  .images-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    justify-content: center;
+  }
+
+  .images-container img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 4px solid #1e3550;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .images-container img:hover {
+    transform: scale(1.07);
+    box-shadow: 0 12px 26px hsla(158, 75%, 45%, 0.7);
+    border-color: var(--primary);
+  }
+
+  .loading {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  footer {
+    margin-top: auto;
+    padding: 18px 0;
+    color: #607d8b;
+    font-size: 0.9rem;
+    user-select: text;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 1.6rem;
+      padding: 12px 16px;
+    }
+    main {
+      padding: 25px 20px;
+      gap: 20px;
+    }
+    input[type=text], button {
+      font-size: 1rem;
+      padding: 12px 15px;
+    }
+    .images-container img {
+      width: 140px;
+      height: 140px;
+    }
+    #introVideo {
+      max-height: 180px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>🤖✨ Travel Buddy</header>
+<!-- Video inserted below header -->
+<video id="introVideo" autoplay muted loop playsinline preload="metadata" style="max-width: 900px; width: 100%; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);">
+  <source src="C:\Users\Sandali Subagya\Desktop\flask_project\vedio.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+
+<main>
+  <label for="placeInput">🔎 Enter your destination:</label>
+  <input type="text" id="placeInput" placeholder="Paris, Tokyo, Sri Lanka, etc." />
+  <button id="searchBtn">Search</button>
+  <div id="result"></div>
+</main>
+
+<footer>
+  Powered by Wikipedia, YouTube, OpenCage, OpenWeatherMap APIs
+</footer>
+
+<script>
+  const YT_API_KEY = 'AIzaSyAd9igkFCWIdrvn2VcJZy0YOdEbLR90HSY';
+  const OWM_API_KEY = 'ea9cc51bbc9981e1a8c06a2d27a1a457';
+  const OPENCAGE_API_KEY = '94803daf57224512ba470a6bae74772c';
+
+  const searchBtn = document.getElementById('searchBtn');
+  const placeInput = document.getElementById('placeInput');
+  const resultDiv = document.getElementById('result');
+
+  async function fetchWikiSummary(title) {
+    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Wikipedia summary failed');
+      const data = await res.json();
+      return {
+        summary: data.extract || 'No summary available.',
+        additional: data.extract_html || 'No additional description available.'
+      };
+    } catch {
+      return {
+        summary: '⚠️ Could not fetch summary.',
+        additional: '⚠️ Error fetching additional info.'
+      };
+    }
+  }
+
+  async function fetchWikiImages(title, maxImages=3) {
+    const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=images&titles=${encodeURIComponent(title)}`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return [];
+      const data = await res.json();
+      const pages = data.query.pages;
+      let imgs = [];
+      for (const pageId in pages) {
+        const images = pages[pageId].images || [];
+        for (const img of images) {
+          const name = img.title.toLowerCase();
+          if (name.endsWith('.jpg') || name.endsWith('.jpeg') || name.endsWith('.png')) {
+            imgs.push(`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(img.title.replace(/ /g, '_'))}`);
+            if (imgs.length >= maxImages) return imgs;
+          }
+        }
+      }
+      return imgs;
+    } catch {
+      return [];
+    }
+  }
+
+  async function fetchYouTubeVideos(query, maxResults=5) {
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query + ' tourism')}&type=video&maxResults=${maxResults}&key=${YT_API_KEY}`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('YouTube API error');
+      const data = await res.json();
+      return data.items.map(item => ({
+        title: item.snippet.title,
+        url: `https://youtu.be/${item.id.videoId}`
+      }));
+    } catch {
+      return [`⚠️ Could not fetch YouTube videos.`];
+    }
+  }
+
+  async function geocodePlace(place) {
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(place)}&key=${OPENCAGE_API_KEY}&limit=1`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Geocoding failed');
+      const data = await res.json();
+      if (data.results && data.results.length > 0) {
+        const { lat, lng } = data.results[0].geometry;
+        return { lat, lng };
+      } else {
+        return null;
+      }
+    } catch {
+      return null;
+    }
+  }
+
+  async function fetchWeather(lat, lon) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM_API_KEY}&units=metric`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Weather fetch failed');
+      const data = await res.json();
+      const weatherDesc = data.weather[0].description;
+      const temp = data.main.temp;
+      const humidity = data.main.humidity;
+      return `${weatherDesc.charAt(0).toUpperCase() + weatherDesc.slice(1)}, ${temp} °C, Humidity: ${humidity}%`;
+    } catch {
+      return '❌ Weather data unavailable.';
+    }
+  }
+
+  async function onSearch() {
+    const place = placeInput.value.trim();
+    if (!place) {
+      alert('Please enter a place name.');
+      return;
+    }
+
+    resultDiv.innerHTML = '<p class="loading">Loading information...</p>';
+
+    let wikiSearchURL = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(place)}&limit=5&namespace=0&format=json&origin=*`;
+    try {
+      const res = await fetch(wikiSearchURL);
+      if (!res.ok) throw new Error('Wikipedia search failed');
+      const data = await res.json();
+      const titles = data[1];
+      if (titles.length === 0) {
+        resultDiv.innerHTML = `<p>❌ No Wikipedia page found for <strong>${place}</strong></p>`;
+        return;
+      }
+      const title = titles[0];
+
+      const [
+        wikiData,
+        images,
+        videos,
+        coords
+      ] = await Promise.all([
+        fetchWikiSummary(title),
+        fetchWikiImages(title),
+        fetchYouTubeVideos(title),
+        geocodePlace(title)
+      ]);
+
+      let html = `
+        <h2 style="background:#ff6600; display:inline-block; padding:10px 15px; border-radius:10px; text-shadow:1px 1px 2px #000;">📍 Travel Guide for <span style="color:#ffffff;">${title}</span></h2>
+        
+        <h3 class="section-title">📝 Summary</h3>
+        <p class="summary">${wikiData.summary} 🌏✈️</p>
+      `;
+
+      if (coords) {
+        const { lat, lng } = coords;
+        const mapUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+        const weather = await fetchWeather(lat, lng);
+        html += `
+          <p class="location-link"><strong style="color:#1abc9c;">🌐 Location:</strong> <a href="${mapUrl}" target="_blank" rel="noopener">View on Google Maps</a></p>
+          <h3 class="section-title">☁️ Current Weather</h3>
+          <p class="weather">${weather} 💧🌡️</p>
+        `;
+      }
+
+      html += `<h3 class="section-title">🎥 YouTube Tourism Videos</h3>`;
+      if (videos.length === 0 || typeof videos[0] === 'string') {
+        html += `<p>${videos[0]}</p>`;
+      } else {
+        html += `<ul class="youtube-list">`;
+        videos.forEach(v => {
+          html += `<li><a href="${v.url}" target="_blank" rel="noopener">${v.title} 🍿🎬</a></li>`;
+        });
+        html += `</ul>`;
+      }
+
+      if (images.length > 0) {
+        html += `<h3 class="section-title">🖼️ Images</h3><div class="images-container">`;
+        images.forEach(imgUrl => {
+          html += `<img src="${imgUrl}" alt="Image of ${title}" loading="lazy" />`;
+        });
+        html += `</div>`;
+      } else {
+        html += `<p>No images available.</p>`;
+      }
+
+      html += `<h3 class="section-title">📚 Additional Information</h3><div class="additional-info">${wikiData.additional} 📖</div>`;
+
+      resultDiv.innerHTML = html;
+
+    } catch (e) {
+      resultDiv.innerHTML = `<p>❌ Error: ${e.message}</p>`;
+    }
+  }
+
+  searchBtn.addEventListener('click', onSearch);
+  placeInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') onSearch();
+  });
+
+  
+</script>
+
+</body>
+</html>
