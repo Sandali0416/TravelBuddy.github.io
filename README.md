@@ -35,7 +35,7 @@ Built with 💙 by `sandali0416`.
 
 ---
 
-## 🛠️ Installation
+## 🛠️ 
 
 ```bash
 git clone https://sandali0416.github.io/TravelBuddy.github.io/
