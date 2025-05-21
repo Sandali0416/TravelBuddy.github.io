@@ -2,7 +2,7 @@
 
 Welcome to **Travel Buddy**, your smart travel assistant that provides AI-powered travel guides, live weather updates, tourism videos, and much more — all in one clean and user-friendly interface.
 
-![Travel Buddy Screenshot](./path_to_screenshot.jpg) <!-- Replace with actual path -->
+![Travel Buddy Screenshot](TB.png) <!-- Replace with actual path -->
 
 ## 🌐 Project Description
 
