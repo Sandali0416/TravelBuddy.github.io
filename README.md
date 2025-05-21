@@ -38,6 +38,5 @@ Built with 💙 by `sandali0416`.
 ## 🛠️ Installation
 
 ```bash
-git clone https://github.com/sandali0416/travel-buddy-ai.git
-cd travel-buddy-ai
+git clone https://sandali0416.github.io/TravelBuddy.github.io/
 open index.html
